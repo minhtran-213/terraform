@@ -12,7 +12,6 @@ module "vpc" {
 
   tags = {
     "Name"                                      = "terraform-eks-demo-node"
-    "kubernetes.io/cluster/${var.cluster-name}" = "shared"
+    "kubernetes.io/cluster/${var.cluster_name}" = "shared"
   }
 }
-

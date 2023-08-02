@@ -1,4 +1,4 @@
-resource "aws_iam_role" "demo-cluster" {
+resource "aws_iam_role" "iam_role_cluster" {
   name = "terraform-eks-demo-cluster"
 
   assume_role_policy = <<POLICY
@@ -18,20 +18,20 @@ POLICY
 
 }
 
-resource "aws_iam_role_policy_attachment" "demo-cluster-AmazonEKSClusterPolicy" {
+resource "aws_iam_role_policy_attachment" "iam_policy_AmazonEKSClusterPolicy" {
   policy_arn = "arn:aws:iam::aws:policy/AmazonEKSClusterPolicy"
-  role       = aws_iam_role.demo-cluster.name
+  role       = aws_iam_role.iam_role_cluster.name
 }
 
-resource "aws_iam_role_policy_attachment" "demo-cluster-AmazonEKSServicePolicy" {
+resource "aws_iam_role_policy_attachment" "iam_policy_AmazonEKSServicePolicy" {
   policy_arn = "arn:aws:iam::aws:policy/AmazonEKSServicePolicy"
-  role       = aws_iam_role.demo-cluster.name
+  role       = aws_iam_role.iam_role_cluster.name
 }
 
 # If no loadbalancer was ever created in this region, then this following role is necessary
-resource "aws_iam_role_policy" "demo-cluster-service-linked-role" {
+resource "aws_iam_role_policy" "iam_cluster_service_linked_role" {
   name = "service-linked-role"
-  role = aws_iam_role.demo-cluster.name
+  role = aws_iam_role.iam_role_cluster.name
 
   policy = <<EOF
 {
