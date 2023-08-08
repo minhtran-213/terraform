@@ -1,5 +1,11 @@
 variable "cluster_name" {
-  default = "ass_prod_cluster"
   type    = string
 }
 
+variable "environment" {
+  type = string
+}
+
+variable "database_instance" {
+  type = string
+}
