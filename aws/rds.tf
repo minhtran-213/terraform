@@ -1,22 +1,22 @@
 resource "aws_db_instance" "mydb" {
-  allocated_storage    = 20
-  storage_type         = "gp2"
-  engine               = "postgres"
-  engine_version       = "13"
-  instance_class       = "db.t3.micro"
-  username             = "ass_admin"
-  password             = "password"
-  parameter_group_name = "default.postgres13"
-  skip_final_snapshot  = true
+  allocated_storage      = 20
+  storage_type           = "gp2"
+  engine                 = "postgres"
+  engine_version         = "13"
+  instance_class         = "db.t3.micro"
+  username               = "ass_admin"
+  password               = "password"
+  parameter_group_name   = "default.postgres13"
+  skip_final_snapshot    = true
   vpc_security_group_ids = [aws_security_group.rds_sg.id]
-  db_subnet_group_name = aws_db_subnet_group.mydb_subnet_group.name
-  multi_az             = false
-  deletion_protection  = false
-  identifier           = "mydb-instance"
+  db_subnet_group_name   = aws_db_subnet_group.mydb_subnet_group.name
+  multi_az               = false
+  deletion_protection    = false
+  identifier             = "${var.database_instance}"
 }
 
 resource "aws_db_subnet_group" "mydb_subnet_group" {
-  name       = "mydb_subnet_group"
+  name       = "db_subnet_group"
   subnet_ids = module.vpc.private_subnets
 
   tags = {

@@ -12,7 +12,7 @@ resource "aws_security_group" "sg_node" {
   }
 
   tags = {
-    "Name"                                      = "terraform_eks_demo_node"
+    "Name"                                      = "terraform_eks_node"
     "kubernetes.io/cluster/${var.cluster_name}" = "owned"
   }
 }

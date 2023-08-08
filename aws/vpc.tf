@@ -1,6 +1,6 @@
 module "vpc" {
   source = "terraform-aws-modules/vpc/aws"
-  name   = "vpc-module-demo"
+  name   = "vpc-module"
   cidr   = "10.0.0.0/16"
 
   azs             = slice(data.aws_availability_zones.available.names, 0, length(data.aws_availability_zones.available.names))
@@ -12,6 +12,7 @@ module "vpc" {
 
   tags = {
     "Name"                                      = "terraform-eks-demo-node"
+    "Environment"                               = "${var.environment}"
     "kubernetes.io/cluster/${var.cluster_name}" = "shared"
   }
 }
