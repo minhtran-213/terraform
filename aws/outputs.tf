@@ -1,8 +1,6 @@
 # outputs
 locals {
   kubeconfig = <<KUBECONFIG
-
-
 apiVersion: v1
 clusters:
 - cluster:
@@ -39,8 +37,6 @@ output "kubeconfig" {
 
 locals {
   config-map-aws-auth = <<CONFIGMAPAWSAUTH
-
-
 apiVersion: v1
 kind: ConfigMap
 metadata:

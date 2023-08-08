@@ -1,5 +1,5 @@
 resource "aws_iam_role" "iam_role_node" {
-  name = "terraform-eks-demo-node"
+  name = "terraform-eks-node"
 
   assume_role_policy = <<POLICY
 {
@@ -39,7 +39,7 @@ resource "aws_iam_role_policy_attachment" "iam_policy_AmazonSSMManagedInstanceCo
 }
 
 resource "aws_iam_instance_profile" "wg_iam_instance_profile" {
-  name = "terraform-eks-demo"
+  name = "terraform-eks"
   role = aws_iam_role.iam_role_node.name
 }
 
