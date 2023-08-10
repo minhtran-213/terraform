@@ -1,6 +1,6 @@
 resource "google_compute_router_nat" "mist_nat" {
   name                               = "nat"
-  project                            = "${var.project_id}"
+  project                            = var.project_id
   router                             = google_compute_router.router.name
   region                             = local.region
   nat_ip_allocate_option             = "AUTO_ONLY"

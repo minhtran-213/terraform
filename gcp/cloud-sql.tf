@@ -1,5 +1,5 @@
 resource "google_sql_database" "database" {
-  project = "${var.project_id}"
+  project  = var.project_id
   name     = "ass_database"
   instance = google_sql_database_instance.instance.name
 }
@@ -8,7 +8,7 @@ resource "google_sql_database" "database" {
 resource "google_sql_database_instance" "instance" {
   name             = "database-instance"
   region           = "us-central1"
-  project = "${var.project_id}"
+  project          = var.project_id
   database_version = "POSTGRES_13"
   settings {
     tier              = "db-f1-micro"
@@ -20,7 +20,7 @@ resource "google_sql_database_instance" "instance" {
 
 resource "google_sql_user" "users" {
   name     = "ass_admin"
-  project = "${var.project_id}"
+  project  = var.project_id
   instance = google_sql_database_instance.instance.name
   password = "password"
 }

@@ -1,13 +1,13 @@
 resource "google_service_account" "k8s-staging" {
-  project    = "${var.project_id}"
+  project    = var.project_id
   account_id = "k8s-acc"
 }
 
 # https://registry.terraform.io/providers/hashicorp/google/latest/docs/resources/container_cluster
 resource "google_container_cluster" "gke" {
-  name     = "gke"
-  location = local.region
-  project  = "${var.project_id}"
+  name     = "ass-prod-cluster"
+  location = "us-central1-a"
+  project  = var.project_id
 
   networking_mode = "VPC_NATIVE"
   network         = google_compute_network.main.self_link
@@ -44,21 +44,26 @@ resource "google_container_cluster" "gke" {
 
 resource "google_container_node_pool" "general" {
   name       = "general"
-  location   = local.region
+  location   = "us-central1-a"
   cluster    = google_container_cluster.gke.name
-  project    = "${var.project_id}"
-  node_count = 1
+  project    = var.project_id
+  node_count = 2
 
   management {
     auto_repair  = true
     auto_upgrade = true
   }
 
+  autoscaling {
+    min_node_count = 1
+    max_node_count = 2 
+  }
+
   node_config {
     labels = {
       role = "general"
     }
-    machine_type = "e2-medium"
+    machine_type = "n1-standard-2"
     disk_size_gb = 50
 
     service_account = google_service_account.k8s-staging.email
